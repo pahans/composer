@@ -141,8 +141,40 @@ class StructDefinition extends React.Component {
 				const { bBox, components: {statements, contentOperations} } = model.getViewState();
         const children = model.getChildren();
         const title = model.getStructName();
+
 				return (
 					<PanelDecorator icon="tool-icons/struct" title={title} bBox={bBox} model={model}>
+              <g>
+                  <rect
+                      x={contentOperations.x }
+                      y={contentOperations.y}
+                      width={contentOperations.w}
+                      height={contentOperations.h}
+                      className="struct-content-operations-wrapper"
+                      fill="#3d3d3d"
+                   />
+                   <rect
+                       x={contentOperations.x + 10}
+                       y={contentOperations.y + 10}
+                       width={188}
+                       height={25}
+                       className="type-drop-wrapper"
+                    />
+                    <rect
+                        x={contentOperations.x + 202}
+                        y={contentOperations.y + 10}
+                        width={196}
+                        height={25}
+                        className="type-drop-wrapper"
+                     />
+                     <rect
+                         x={contentOperations.x + 402}
+                         y={contentOperations.y + 10}
+                         width={155}
+                         height={25}
+                         className="type-drop-wrapper"
+                      />
+              </g>
               <g>
                 {
                     children.map( (child, i) => {

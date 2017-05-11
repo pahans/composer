@@ -70,8 +70,23 @@ class StructDefinitionPositionCalcVisitor {
 
         const { statements, contentOperations } = viewSate.components;
 
-        contentOperations.x = bodyX + DesignerDefaults.structDefinition.padding.left;
-        contentOperations.y = bodyY +  DesignerDefaults.structDefinition.padding.top;
+        contentOperations.typeWrapper.x = bodyX + DesignerDefaults.structDefinition.padding.left;
+        contentOperations.typeWrapper.y = bodyY +  DesignerDefaults.structDefinition.padding.top;
+
+        contentOperations.typeText.x = contentOperations.typeWrapper.x + DesignerDefaults.structDefinitionStatement.padding.left;
+        contentOperations.typeText.y = contentOperations.typeWrapper.y + DesignerDefaults.structDefinitionStatement.height / 2;
+
+        contentOperations.identifierText.x = contentOperations.identifierWrapper.x + DesignerDefaults.structDefinitionStatement.padding.left;
+        contentOperations.identifierText.y = contentOperations.typeWrapper.y + DesignerDefaults.structDefinitionStatement.height / 2;
+
+        contentOperations.valueWrapper.x = contentOperations.identifierWrapper.x + contentOperations.identifierWrapper.w;
+        contentOperations.valueWrapper.y = contentOperations.identifierWrapper.y;
+
+        contentOperations.valueText.x = contentOperations.valueWrapper.x + DesignerDefaults.structDefinitionStatement.padding.left;
+        contentOperations.valueText.y = contentOperations.identifierWrapper.y + DesignerDefaults.structDefinitionStatement.height / 2;
+
+        contentOperations.submitButton.x = contentOperations.typeWrapper.x + DesignerDefaults.structDefinitionStatement.width - DesignerDefaults.structDefinitionStatement.submitButtonOffset;
+        contentOperations.submitButton.y = contentOperations.typeText.y;
 
         statements.forEach( (statement, i) => {
             const margin = DesignerDefaults.structDefinitionStatement.margin.bottom;

@@ -149,7 +149,8 @@ function getCompoundStatementChildPosition(node) {
                 ASTFactory.isServiceDefinition(child) ||
                 ASTFactory.isConnectorDefinition(child) ||
                 ASTFactory.isAnnotationDefinition(child) ||
-                ASTFactory.isPackageDefinition(child);
+                ASTFactory.isPackageDefinition(child) ||
+                ASTFactory.isStructDefinition(child)
         });
         let heading = viewSate.components.heading;
         let body = viewSate.components.body;
@@ -170,7 +171,7 @@ function getCompoundStatementChildPosition(node) {
         x = headerX;
         y = headerY;
         bodyX = headerX;
-        bodyY = headerY + heading.h + annotation.h;
+        bodyY = headerY + heading.h;
 
         bBox.x = x;
         bBox.y = y;

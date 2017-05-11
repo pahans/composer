@@ -36,7 +36,7 @@ class CreateStruct extends React.Component {
     render() {
         const style = {
             position: 'absolute',
-            top: this.props.bBox.y,
+            top: this.props.bBox.y + 300,
             left: this.props.bBox.x,
             width: this.props.bBox.w,
             height: this.props.bBox.h
