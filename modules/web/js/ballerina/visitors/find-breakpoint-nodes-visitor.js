@@ -27,6 +27,7 @@ class FindBreakpointNodesVisitor extends ASTVisitor {
         this._breakpoints = breakpoints;
     }
     beginVisit(node) {
+        console.log(node);
         const lineNumber = node.getLineNumber();
         const breakpointIndex = this._breakpoints.indexOf(lineNumber);
         if(breakpointIndex !== -1){

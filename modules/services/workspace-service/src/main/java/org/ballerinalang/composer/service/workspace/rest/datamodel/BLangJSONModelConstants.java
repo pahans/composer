@@ -311,4 +311,6 @@ public class BLangJSONModelConstants {
     public static final String CHILD_DESCRIPTORS = "children";
 
     public static final String WHITESPACE_REGIONS = "regions";
+
+    public static final String IS_IDENTIFIER_LITERAL = "is_identifier_literal";
 }

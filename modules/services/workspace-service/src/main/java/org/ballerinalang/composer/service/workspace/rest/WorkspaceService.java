@@ -181,12 +181,13 @@ public class WorkspaceService {
             if (splitConfigContent.length > 1) {
                 config = splitConfigContent[1];
             }
-            byte[] base64Config = Base64.getDecoder().decode(config);
+//            byte[] base64Config = Base64.getDecoder().decode(config);
             byte[] base64ConfigName = Base64.getDecoder().decode(configName);
             byte[] base64Location = Base64.getDecoder().decode(location);
             Files.write(Paths.get(new String(base64Location, Charset.defaultCharset()) +
                                   System.getProperty(FILE_SEPARATOR) +
-                                  new String(base64ConfigName, Charset.defaultCharset())), base64Config);
+                                  new String(base64ConfigName, Charset.defaultCharset())),
+                        config.getBytes(Charset.defaultCharset()));
             JsonObject entity = new JsonObject();
             entity.addProperty(STATUS, SUCCESS);
             return Response.status(Response.Status.OK).entity(entity).header("Access-Control-Allow-Origin", '*').type

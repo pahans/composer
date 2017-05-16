@@ -633,7 +633,7 @@ class ASTVisitor extends EventChannel {
 
     endVisitCommentStatement(variableDefinition) {
     }
-    
+
     canVisitAnnotation(annotation){
         return false;
     }
