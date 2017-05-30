@@ -24,6 +24,7 @@ class DebugPoint {
     constructor(args) {
         this.fileName = args.fileName || '';
         this.lineNumber = args.lineNumber || 0;
+        this.packageName = args.packageName || '';
     }
 }
 

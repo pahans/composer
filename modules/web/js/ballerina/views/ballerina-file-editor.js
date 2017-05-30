@@ -815,6 +815,9 @@ class BallerinaFileEditor extends EventChannel {
       * find nodes which has debugpoints in design view
      */
     _showDesignViewBreakpoints(breakpoints = []) {
+        if(!breakpoints.length) {
+            return;
+        }
         const findBreakpointsVisitor = new FindBreakpointNodesVisitor(this._model);
         findBreakpointsVisitor.setBreakpoints(breakpoints);
         this._model.accept(findBreakpointsVisitor);
@@ -875,9 +878,10 @@ class BallerinaFileEditor extends EventChannel {
         } else if(this.isInDesignView()) {
             breakpoints = this.getBreakpoints();
         }
-        DebugManager.removeAllBreakpoints(fileName);
+        const packageName = this._package.getName();
+        DebugManager.removeAllBreakpoints(packageName, fileName);
         breakpoints.forEach( lineNumber => {
-            DebugManager.addBreakPoint(lineNumber, fileName);
+            DebugManager.addBreakPoint(packageName, fileName, lineNumber);
         });
     }
 

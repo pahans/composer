@@ -245,7 +245,10 @@ class SourceView extends EventChannel {
             return;
         }
     }
-
+    /**
+     * 
+     * @param {int[]} breakpoints 
+     */
     setBreakpoints(breakpoints = []) {
         // ace editor breakpoints counts from 0;
         var sourceViewBreakPoints = breakpoints.map( breakpoint => {
@@ -253,7 +256,9 @@ class SourceView extends EventChannel {
         });
         this._editor.getSession().setBreakpoints(sourceViewBreakPoints);
     }
-
+    /**
+     * @returns list of breakpoints
+     */
     getBreakpoints() {
         const sourceViewBreakPointRows = this._editor.getSession().getBreakpoints() || [];
         const sourceViewBreakPoints = sourceViewBreakPointRows.map( (value, row) => {

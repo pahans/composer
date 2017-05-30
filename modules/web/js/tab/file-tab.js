@@ -159,9 +159,9 @@ FileTab = Tab.extend({
         });
 
         DebugManager.on('debug-hit', function(message){
-            var position = message.location;
-            if(position.fileName == this._file.getName()){
-                fileEditor.debugHit(DebugManager.createDebugPoint(position.lineNumber, position.fileName));
+            const position = message.location;
+            if(position.fileName === this._file.getName()){
+                fileEditor.debugHit(DebugManager.createDebugPoint(position.packageName, position.lineNumber, position.fileName));
             }
         }, this);
 
@@ -228,7 +228,7 @@ FileTab = Tab.extend({
     },
 
     removeAllBreakpoints: function() {
-        DebugManager.removeAllBreakpoints(this._file.getName());
+        DebugManager.removeAllBreakpoints(packageName, this._file.getName());
     },
 
     getBreakPoints: function() {

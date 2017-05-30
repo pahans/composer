@@ -110,14 +110,14 @@ class DebugManager extends EventChannel {
         });
     }
 
-    addBreakPoint(lineNumber, fileName) {
+    addBreakPoint(fileName, lineNumber) {
         log.debug('debug point added', lineNumber, fileName);
         const point = new DebugPoint({ 'fileName': fileName , 'lineNumber': lineNumber});
         this.debugPoints.push(point);
         this.trigger('breakpoint-added', fileName);
     }
 
-    removeBreakPoint(lineNumber, fileName) {
+    removeBreakPoint(packageName, fileName, lineNumber) {
         log.debug('debug point removed', lineNumber, fileName);
         const point = new DebugPoint({ 'fileName': fileName , 'lineNumber': lineNumber});
         _.remove(this.debugPoints, item => {
@@ -156,16 +156,16 @@ class DebugManager extends EventChannel {
         return breakpointsLineNumbers;
     }
 
-    removeAllBreakpoints(fileName) {
+    removeAllBreakpoints(packageName, fileName) {
         _.remove(this.debugPoints, item => {
-            return item.fileName === fileName;
+            return item.fileName === fileName && item.packageName === packageName;
         });
-        log.debug('removed all debugpoints for fileName', fileName);
+        log.debug(`removed all debugpoints for fileName: ${fileName}, packageName: ${packageName}`);
         this.publishBreakpoints();
     }
 
-    createDebugPoint(lineNumber, fileName) {
-        return new DebugPoint({ 'fileName': fileName , 'lineNumber': lineNumber});
+    createDebugPoint(packageName, fileName, lineNumber) {
+        return new DebugPoint({ 'fileName': fileName , 'lineNumber': lineNumber, 'packageName': packageName});
     }
 }
 

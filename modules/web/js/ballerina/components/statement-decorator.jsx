@@ -87,10 +87,11 @@ class StatementDecorator extends React.Component {
 	onBreakpointClick() {
 			const { model } = this.props;
 			const { isBreakpoint = false } = model;
+			const packageName = this.context.renderingContext.getPackagedScopedEnvironment().getCurrentPackage().getName();
 			if(model.isBreakpoint) {
-					model.removeBreakpoint();
+					model.removeBreakpoint(packageName);
 			} else {
-					model.addBreakpoint();
+					model.addBreakpoint(packageName);
 			}
 	}
 
