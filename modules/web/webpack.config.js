@@ -19,69 +19,80 @@ var config = {
         path: path.resolve(__dirname, 'dist')
     },
     module: {
-        rules: [{
-            test: /\.js$/,
-            exclude: /(node_modules|modules\/web\/lib)/,
-            use: [
-                {
-                    loader: 'babel-loader',
-                    query: {
-                        presets: ['es2015', 'react']
-                    }
+        rules: [
+            {
+                enforce: "pre",
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: "eslint-loader",
+                options: {
+                    failOnError: false,
+                    failOnWarning: false,
                 }
-            ]
-        },
-        {
-            test: /\.html$/,
-            use: [ {
-                loader: 'html-loader'
-            }]
-        },
-        {
-            test: /\.scss$/,
-            use: extractThemes.extract({
-                fallback: "style-loader",
-                use: [{
-                    loader: "css-loader",
-                    options: {
-                        sourceMap: true
+            },
+            {
+                test: /\.js$/,
+                exclude: /(node_modules|modules\/web\/lib)/,
+                use: [
+                    {
+                        loader: 'babel-loader',
+                        query: {
+                            presets: ['es2015', 'react']
+                        }
                     }
-                }, {
-                    loader: "sass-loader",
-                    options: {
-                        sourceMap: true
-                    }
+                ]
+            },
+            {
+                test: /\.html$/,
+                use: [ {
+                    loader: 'html-loader'
                 }]
-            })
-        },
-        {
-            test: /\.css$/,
-            use: extractCSSBundle.extract({
-                fallback: "style-loader",
-                use: [{
-                    loader: "css-loader",
-                    options: {
-                        sourceMap: true
+            },
+            {
+                test: /\.scss$/,
+                use: extractThemes.extract({
+                    fallback: "style-loader",
+                    use: [{
+                        loader: "css-loader",
+                        options: {
+                            sourceMap: true
+                        }
+                    }, {
+                        loader: "sass-loader",
+                        options: {
+                            sourceMap: true
+                        }
+                    }]
+                })
+            },
+            {
+                test: /\.css$/,
+                use: extractCSSBundle.extract({
+                    fallback: "style-loader",
+                    use: [{
+                        loader: "css-loader",
+                        options: {
+                            sourceMap: true
+                        }
+                    }]
+                })
+            },
+            {
+                test: /\.(png|jpg|svg|cur|gif)$/,
+                use: [ 'url-loader' ]
+            },
+            {
+                test: /\.jsx$/,
+                exclude: /(node_modules|modules\/web\/lib)/,
+                use: [
+                    {
+                        loader: 'babel-loader',
+                        query: {
+                            presets: ['es2015', 'react']
+                        }
                     }
-                }]
-            })
-        },
-        {
-            test: /\.(png|jpg|svg|cur|gif)$/,
-            use: [ 'url-loader' ]
-        },
-        {
-            test: /\.jsx$/,
-            exclude: /(node_modules|modules\/web\/lib)/,
-            use: [
-                {
-                    loader: 'babel-loader',
-                    query: {
-                        presets: ['es2015', 'react']
-                    }
-                }
-            ]
-        }
+                ]
+            }
         ]
     },
     plugins: [

@@ -13,7 +13,7 @@ module.exports = {
             "error",
             "unix"
         ],
-        "no-unused-vars": "error",
+        "no-unused-vars": "warn",
         "no-undef": "error",
         "no-mixed-spaces-and-tabs": "error",
         "no-redeclare": "error",
@@ -22,7 +22,7 @@ module.exports = {
             4
         ],
         "quotes": [
-            "error",
+            "warn",
             "single"
         ],
         "semi": [
@@ -30,7 +30,7 @@ module.exports = {
             "always"
         ],
         "eqeqeq": [
-            "error",
+            "warn",
             "always"
         ]
     }
