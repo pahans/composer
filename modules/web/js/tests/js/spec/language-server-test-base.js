@@ -25,10 +25,10 @@ import SourceViewCompleterFactory from 'ballerina/utils/source-view-completer-fa
 
 /**
  * Test completions
- * @param {object} cursorPosition 
- * @param {object} testFilePath 
- * @param {string} testFileName 
- * @param {function} done 
+ * @param {object} cursorPosition
+ * @param {object} testFilePath
+ * @param {string} testFileName
+ * @param {function} done
  */
 
 export function testCompletions(cursorPosition, directory, testFileName, expectedFile, done, getCompareCallback) {
