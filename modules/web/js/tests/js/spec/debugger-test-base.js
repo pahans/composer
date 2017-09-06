@@ -18,97 +18,21 @@
 
 /* eslint-env es6 */
 
-import {expect} from 'chai';
-import path from 'path';
-import fs from 'fs';
-import _ from 'lodash';
-import {fetchConfigs, parseContent} from 'api-client/api-client';
-import File from 'workspace/file';
-import LaunchManager from './../../../launcher/launch-manager';
-// import Debugger from './../../../debugger/module';
-import DebugManager from './../../../debugger/debug-manager';
-// import Launcher from './../../../launcher/launcher';
+import LaunchChannel from 'js/launcher/launch-channel';
 
 /**
  * Class for the debugger test bases.
  * @class DebuggerTestBase
  * */
 class DebuggerTestBase {
-    static testDebugger(testFileName, directory, done) {
-        const testFilePath = path.join(directory, 'js', 'tests', 'resources', 'debugger');
-        const testFile = path.resolve(path.join(testFilePath, testFileName));
-        const testFileContent = fs.readFileSync(testFile, 'utf8');
-
-        let file = new File({
-            name: testFileName,
-            path: testFilePath,
-            content: testFileContent,
-            isPersisted: true,
-            isDirty: false,
-        });
-        console.log(file);
-
-        const config = {
-            application: {
-                config: {
-                    services: {
-                        workspace: {
-                            endpoint: "http://localhost:8289/service/workspace",
-                        },
-                        packages: {
-                            endpoint: "http://localhost:8289/service/packages",
-                        },
-                        swagger: {
-                            endpoint: "http://localhost:8289/service/swagger",
-                        },
-                        parser: {
-                            endpoint: "http://localhost:8289/ballerina/model/content",
-                        },
-                        fragmentParser: {
-                            endpoint: "http://localhost:8289/ballerina/model/parse-fragment",
-                        },
-                        validator: {
-                            endpoint: "http://localhost:8289/ballerina/validate",
-                        },
-                        launcher: {
-                            endpoint: "ws://localhost:8290/launch",
-                        },
-                        debugger: {
-                            endpoint: "ws://localhost:5006/debug",
-                        },
-                        langserver: {
-                            endpoint: "ws://localhost:8291/blangserver",
-                        },
-                        programNativeTypes: {
-                            endpoint: "http://localhost:8289/service/program/native/types",
-                        },
-                        programPackages: {
-                            endpoint: "http://localhost:8289/service/program/packages",
-                        },
-                        typeLattice: {
-                            endpoint: "http://localhost:8289/typelattice",
-                        },
-                    },
-                },
-                reRender: () => {
-                },
-                browserStorage: {
-                    get: () => {
-                    },
-                },
-            },
+    static testLauncher() {
+        const launchChannel = new LaunchChannel({ endpoint: 'ws://localhost:8290/launch' });
+        launchChannel.onError = (err) => {
+            throw err;
         };
+        launchChannel.onClose = function () { };
 
-        LaunchManager.init(config);
-
-        const debuggerOpts = {};
-        _.set(debuggerOpts, 'application', config.application);
-        _.set(debuggerOpts, 'launchManager', LaunchManager);
-        // this.debugger = new Debugger(debuggerOpts);
-
-        DebugManager.init(debuggerOpts);
-        DebugManager.addBreakPoint(3, testFileName, file.getPackageName());
-        LaunchManager.debugApplication(file);
+        return launchChannel;
     }
 }
 
