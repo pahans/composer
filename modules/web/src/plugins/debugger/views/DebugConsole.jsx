@@ -75,6 +75,7 @@ class DebuggerConsole extends View {
      */
     render() {
         const { height } = this.props;
+        console.log('Rendering console..............');
         return (
             <div id="console" style={{ height }}>
                 {this.state.messages.map((message) => {

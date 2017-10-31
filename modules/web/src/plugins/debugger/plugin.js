@@ -27,6 +27,7 @@ import { PLUGIN_ID, VIEWS as VIEW_IDS, DIALOG_IDS, COMMANDS as COMMAND_IDS, TOOL
 
 import DebuggerPanel from './views/DebuggerPanel';
 import DebuggerConsole from './views/DebugConsole';
+import LogsConsole from './views/LogsConsole';
 import LauncherConfigDialog from './views/LauncherConfigDialog';
 import RemoteDebugDialog from './views/RemoteDebugDialog';
 
@@ -148,6 +149,30 @@ class DebuggerPlugin extends Plugin {
                     regionOptions: {
                         panelTitle: 'Console',
                         panelActions: [
+                        ],
+                    },
+                    displayOnLoad: true,
+                }, {
+                    id: VIEW_IDS.LOGS_CONSOLE,
+                    component: LogsConsole,
+                    propsProvider: () => {
+                        LaunchManager.init(this.appContext.services.launcher.endpoint);
+                        return {
+                            debuggerPlugin: this,
+                            LaunchManager,
+                        };
+                    },
+                    region: REGIONS.BOTTOM_PANEL,
+                    // region specific options for bottom views
+                    regionOptions: {
+                        panelTitle: 'HTTP Logs',
+                        panelActions: [
+                            {
+                                icon: 'start',
+                                handleAction: () => {
+                
+                                },
+                            },
                         ],
                     },
                     displayOnLoad: true,
