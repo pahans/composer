@@ -25,7 +25,23 @@ import Environment from '../env/environment';
  *
  * @param {Fragment} fragment Source Fragment
  */
-function getNodeForFragment(fragment) {
+function getNodeForFragmentAsync(fragment) {
+    return FragmentUtils.parseFragment(fragment).then((parsedJson) => {
+        const node = TreeBuilder.build(parsedJson);
+        node.clearWS();
+        return node;
+    });
+}
+
+/**
+ * Creates the node instance for given source fragment
+ *
+ * @param {Fragment} fragment Source Fragment
+ */
+function getNodeForFragment(fragment, options = {}) {
+    if (options.cacheRequest) {
+        return getNodeForFragmentAsync(fragment);
+    }
     const parsedJson = FragmentUtils.parseFragment(fragment);
     const node = TreeBuilder.build(parsedJson);
     node.clearWS();
