@@ -17,6 +17,7 @@
 */
 package org.ballerinalang.composer.service.workspace.rest.datamodel;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -30,6 +31,7 @@ import org.wso2.ballerinalang.compiler.tree.BLangPackage;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Utility for parsing BLang source fragments.
@@ -41,6 +43,15 @@ public class BLangFragmentParser {
     public static final String SYNTAX_ERRORS = "syntax_errors";
     public static final String ERROR = "error";
 
+    public static String parseDefaultNodeFragments(JsonObject sourceFragments) {
+        JsonObject fragments = new JsonObject();
+        for (Map.Entry<String, JsonElement> entry : sourceFragments.entrySet()) {
+            Gson gson = new Gson();
+            BLangSourceFragment fragment = gson.fromJson(entry.getValue(), BLangSourceFragment.class);
+            fragments.addProperty(entry.getKey(), parseFragment(fragment));
+        }
+        return fragments.toString();
+    }
     public static String parseFragment(BLangSourceFragment sourceFragment) {
         try {
             String parsableString = getParsableString(sourceFragment);

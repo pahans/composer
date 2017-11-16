@@ -126,6 +126,9 @@ public class ConfigServiceImpl {
         JsonObject fragmentParser = new JsonObject();
         fragmentParser.addProperty("endpoint", apiPath + "/ballerina/model/parse-fragment");
 
+        JsonObject defaultNodeFragments = new JsonObject();
+        defaultNodeFragments.addProperty("endpoint", apiPath + "/ballerina/model/get-default-node-fragments");
+
         JsonObject launcher = new JsonObject();
         launcher.addProperty("endpoint", launcherPath + "/launch");
 
@@ -159,6 +162,7 @@ public class ConfigServiceImpl {
         services.add("swagger", swagger);
         services.add("parser", parser);
         services.add("fragmentParser", fragmentParser);
+        services.add("defaultNodeFragments", defaultNodeFragments);
         services.add("launcher", launcher);
         services.add("debugger", debugger);
         services.add("langserver", langserver);

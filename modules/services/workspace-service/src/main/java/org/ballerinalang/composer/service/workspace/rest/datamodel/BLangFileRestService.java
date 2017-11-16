@@ -127,6 +127,27 @@ public class BLangFileRestService {
                 .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
     }
 
+    @POST
+    @Path("/model/get-default-node-fragments")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getDefaultNodeFragments(JsonObject sourceFragments) throws IOException {
+        String response = BLangFragmentParser.parseDefaultNodeFragments(sourceFragments);
+        return Response.ok(response, MediaType.APPLICATION_JSON).header("Access-Control-Allow-Origin", '*').build();
+    }
+
+    @OPTIONS
+    @Path("/model/get-default-node-fragments")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response optionsGetDefaultNodeFragments() {
+        return Response.ok()
+                .header("Access-Control-Max-Age", "600 ")
+                .header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Credentials",
+                        "true").header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
+                .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+    }
+
     public static JsonElement generateJSON(Node node, Map<String, Node> anonStructs)
             throws InvocationTargetException, IllegalAccessException {
         if (node == null) {
