@@ -36,6 +36,14 @@ const tools = [
         description: 'Provide a way to execute a series of statements as long as a boolean expression is met',
     },
     {
+        id: 'for-each',
+        name: 'For Each',
+        icon: 'for-each',
+        title: 'For Each',
+        nodeFactoryMethod: DefaultNodeFactory.createForEach,
+        description: 'Provide a way to iterate for every element',
+    },
+    {
         id: 'try-catch',
         name: 'Try-Catch',
         icon: 'try-catch',

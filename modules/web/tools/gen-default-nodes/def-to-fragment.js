@@ -206,6 +206,13 @@ export default {
             }
         `);
     },
+    createForEach: () => {
+        return FragmentUtils.createStatementFragment(`
+            foreach a in array {
+                
+            }
+        `);
+    },
     createBreak: () => {
         return FragmentUtils.createStatementFragment(`
             break;

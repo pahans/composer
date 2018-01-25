@@ -279,6 +279,10 @@ class AbstractTreeUtil {
         return node.kind === 'While';
     }
 
+    isForEach(node) {
+        return node.kind === 'f';
+    }
+
     isWorkerReceive(node) {
         return node.kind === 'WorkerReceive';
     }

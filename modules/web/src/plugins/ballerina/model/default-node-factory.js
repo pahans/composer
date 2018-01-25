@@ -175,6 +175,10 @@ class DefaultNodeFactory {
         return getStaticDefaultNode('createWhile');
     }
 
+    createForEach() {
+        return getStaticDefaultNode('createForEach');
+    }
+
     createBreak() {
         return getStaticDefaultNode('createBreak');
     }
