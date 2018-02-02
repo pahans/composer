@@ -276,13 +276,6 @@ class TransactionStatementDecorator extends React.Component {
                                 y2={connectorEdgeBottomY}
                                 className='flowchart-background-empty-rect'
                             />,
-                            <line
-                                x1={model.failedBody.viewState.bBox.x}
-                                y1={model.failedBody.viewState.bBox.y + model.failedBody.viewState.bBox.h}
-                                x2={model.failedBody.viewState.bBox.x}
-                                y2={connectorEdgeBottomY}
-                                className='flowchart-background-empty-rect'
-                            />,
                             <ArrowDecorator
                                 start={{
                                     x: p4X,

@@ -20,7 +20,6 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import breakpointHoc from 'src/plugins/debugger/views/BreakpointHoc';
 import SimpleBBox from 'plugins/ballerina/model/view/simple-bounding-box';
-import ExpressionEditor from 'plugins/ballerina/expression-editor/expression-editor-utils';
 import Node from '../../../../../model/tree/node';
 import DropZone from '../../../../../drag-drop/DropZone';
 import './compound-statement-decorator.css';
@@ -169,22 +168,6 @@ class TransactionFailedDecorator extends React.Component {
     }
 
     /**
-     * renders an ExpressionEditor in the header space.
-     * @param {string} value - Initial value.
-     * @param {object} options - options to be sent to ExpressionEditor.
-     */
-    openEditor(value, options) {
-        const packageScope = this.context.environment;
-        if (value && options) {
-            new ExpressionEditor(
-                this.conditionBox,
-                this.onUpdate.bind(this),
-                options,
-                packageScope).render(this.context.getOverlayContainer());
-        }
-    }
-
-    /**
      * Render breakpoint element.
      * @private
      * @return {XML} React element of the breakpoint.
@@ -243,11 +226,11 @@ class TransactionFailedDecorator extends React.Component {
         const p2X = bBox.x - (titleW / 2);
         const p2Y = p1Y + (titleH / 2);
 
-        const p6X = bBox.x;
-        const p6Y = bBox.y + bBox.h;
-
         const p8X = bBox.x;
         const p8Y = p2Y + (titleH / 2);
+
+        const p6X = bBox.x;
+        const p6Y = p8Y + this.context.designer.config.statement.height;
 
         const p11X = p1X;
         const p11Y = p1Y + (titleH / 2);
