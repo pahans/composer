@@ -1363,7 +1363,7 @@ class PositioningUtil {
 
         // Set the position of the failed body
         if (failedBody) {
-            failedBody.viewState.bBox.x = bBox.x + this.config.compoundStatement.gap.left + 
+            failedBody.viewState.bBox.x = bBox.x + this.config.compoundStatement.gap.left +
                 transactionBody.viewState.bBox.w;
             failedBody.viewState.bBox.y = node.viewState.bBox.y + this.config.compoundStatement.padding.top;
             this.positionCompoundStatementComponents(failedBody);
